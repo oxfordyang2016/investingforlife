@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+    <title>思考与笔记</title>
+ <link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png">
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+</head>
+<body>
+<h2>专注与思考</h2>
+<table style="width:100%">
+  <tr>
+    <th>bookmark</th>
+    <th>url</th> 
+  </tr>
+  {% for bookmark in allurls %}
+  <!-- <li>{{n}}</li> -->
+  <tr>
+  <td ><a href='{{bookmark["url"]}}'>{{bookmark["summary"]}}</a></td>
+    <!-- <td><div cols="20" id="biao1">123456789</div>
+      <div cols="20" id="biao2">12345678</div>
+      <input type="button" onClick="copyUrl2()" value="点击复制代码" /></td> -->
+      <td><button class="btn1" id="btn1" var summary='{{bookmark["summary"]}}' url='{{bookmark["url"]}}'>copy it</button></td>
+  </tr>
+  {% endfor %}
+<!-- https://stackoverflow.com/questions/17784037/how-to-display-pdf-file-in-html -->
+</table>
+<!-- <embed src="http://127.0.0.1:9999/thinkingforlife/getbookmark?code=fe2546fa1fcb93ae42e2f2e5980449f2" width="800px" height="2100px" /> -->
+<script>
+// const btn = document.querySelector('#btn');
+// btn.addEventListener('click',() => {
+// 	const input = document.createElement('input');
+//     input.setAttribute('readonly', 'readonly');
+//     input.setAttribute('value', 'hello world');
+//     document.body.appendChild(input);
+// 	input.setSelectionRange(0, 9999);
+// 	if (document.execCommand('copy')) {
+// 		document.execCommand('copy');
+// 		console.log('复制成功');
+// 	}
+//     document.body.removeChild(input);
+// })
+
+$(".btn1").on("click",function(){
+    var url=$(this).attr("url");
+    var summary=$(this).attr("summary");
+    //执行之后的代码
+  //  alert(canshu)
+   var oInput = document.createElement('input');
+        oInput.value = summary+" "+url;
+        document.body.appendChild(oInput);
+        oInput.select(); // 选择对象
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        oInput.className = 'oInput';
+        oInput.style.display='none';
+        alert('复制成功');
+});
+ 
+function copyUrl2()
+    {
+        var Url2=document.getElementById("biao1").innerText;
+        var oInput = document.createElement('input');
+        var x = document.getElementById("biao1").parentNode.parentNode.children[0].innerText;
+        alert(x)
+        oInput.value = Url2;
+        document.body.appendChild(oInput);
+        oInput.select(); // 选择对象
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        oInput.className = 'oInput';
+        oInput.style.display='none';
+        alert('复制成功');
+    }
+
+
+    $(document).ready(function () {
+
+if(location.href.indexOf("#reloaded")==-1){
+   location.href=location.href+"#reloaded";
+   location.reload();
+}
+})
+
+
+
+</script>
+</body>
+</html>
